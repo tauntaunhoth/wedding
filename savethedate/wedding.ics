@@ -1,0 +1,16 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Katrina and Matthew//Save the date//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:wedding-20271120@weddingkatrina.matthewmacknamara.com
+DTSTAMP:20261122T000000Z
+DTSTART:20271120T050000Z
+DTEND:20271120T120000Z
+SUMMARY:Wedding of Katrina & Matthew
+LOCATION:Re'em Yarra Valley\, Helen & Joey Estate\, 12-14 Spring Lane\, Gruyere VIC 3770
+DESCRIPTION:Save the date. Invitation to follow.\nhttps://weddingkatrina.matthewmacknamara.com/
+URL:https://weddingkatrina.matthewmacknamara.com/
+END:VEVENT
+END:VCALENDAR

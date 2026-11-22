@@ -69,7 +69,7 @@ a{color:#1E2226}a:hover{color:#53565A}
 </g>
 </svg>
 
-<p class="t lay" style="top: {{stdTop}}px; padding-left: 0.42em; font-size: {{stdSize}}px; line-height: 1.2; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: #53565A; opacity: {{stdO}}; transition: opacity {{tText}}ms ease, top {{tMove}}ms cubic-bezier(0.65, 0, 0.35, 1), font-size {{tMove}}ms cubic-bezier(0.65, 0, 0.35, 1)">Save the date</p>
+<p class="t lay" style="top: 70px; padding-left: 0.42em; font-size: 11px; line-height: 1.2; font-weight: 500; letter-spacing: 0.42em; text-transform: uppercase; color: #53565A; opacity: {{stdO}}; transform: translateY({{stdY}}px) scale({{stdS}}); transform-origin: 50% 0; transition: opacity {{tText}}ms ease, transform {{tMove}}ms cubic-bezier(0.65, 0, 0.35, 1)">Save the date</p>
 
 
 
@@ -248,7 +248,7 @@ a{color:#1E2226}a:hover{color:#53565A}
 
 <span class="t ab" style="left: {{xpr.3.x}}px; top: 470px; font-size: 40px; font-weight: {{xpr.3.wt}}; color: {{xpr.3.col}}; opacity: {{xpr.3.o}}; transition: opacity {{tf}}ms ease" aria-hidden="true">{{xpr.3.t}}</span>
 
-<p class="t lay" style="top: 522px; padding: 0 40px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; line-height: 1.15; font-weight: 500; font-style: italic; color: #1E2226; opacity: {{t6c.o}}; transform: translateY({{t6c.y}}px); transition: opacity {{tText}}ms ease, transform {{tText}}ms ease">…we found<br>the perfect date.</p>
+<p class="t lay" style="top: 522px; padding: 0 40px; font-family: 'Cormorant Garamond', Georgia, serif; font-size: 30px; line-height: 1.15; font-weight: 500; font-style: italic; color: #1E2226; opacity: {{t6c.o}}; transform: translateY({{t6c.y}}px); transition: opacity {{tText}}ms ease, transform {{tText}}ms ease">We found<br>the perfect date.</p>
 
 
 <div class="t lay" style="top: 190px; display: flex; flex-direction: column; align-items: center; gap: 12px; opacity: {{endT.o}}; transform: translateY({{endT.y}}px); filter: blur({{endT.b}}px); transition: opacity {{tText}}ms ease, transform {{tText}}ms ease, filter {{tText}}ms ease">
@@ -264,7 +264,10 @@ a{color:#1E2226}a:hover{color:#53565A}
 </div>
 <div style="position: absolute; left: 0; right: 0; bottom: 56px; display: flex; justify-content: center; gap: 14px">
 <span data-if="showEnd" style="display: contents">
-<a class="fadein" href="{{calHref}}" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-bottom: 1px solid #75787B; color: #1E2226; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase">Add to calendar</a>
+<a class="fadein" href="{{calHref}}" target="{{calTarget}}" rel="noopener" style="display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border-bottom: 1px solid #75787B; color: #1E2226; text-decoration: none; font-size: 12px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase">Add to calendar</a>
+<span data-if="calAlt" style="display: contents">
+<a class="fadein" href="{{googleHref}}" target="_blank" rel="noopener" style="position: absolute; left: 0; right: 0; bottom: -30px; text-align: center; color: #53565A; font-size: 11px; font-weight: 300; letter-spacing: 0.04em">or add to Google Calendar</a>
+</span>
 <button type="button" class="fadein" data-click="replay" style="min-height: 44px; padding: 0 16px; border-radius: 0; border: none; border-bottom: 1px solid #75787B; background: transparent; color: #1E2226; font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif; font-size: 12px; font-weight: 500; letter-spacing: 0.26em; text-transform: uppercase; cursor: pointer">Replay</button>
 </span>
 </div>
@@ -285,7 +288,7 @@ class Component extends DCLogic {
     this.END = 34;
     this.boards = [
       { s: 1, n: '1 · The hook' }, { s: 8, n: '2 · Perfect' }, { s: 11, n: '3 · The flip' },
-      { s: 12, n: '4 · Marriage' }, { s: 15, n: '5 · Our date' }, { s: 16, n: '6a · Add it all' },
+      { s: 12, n: '4 · Marriage' }, { s: 15, n: '5 · Our date' }, { s: 16, n: '6a · The digits' },
       { s: 26, n: '6b · Each part' }, { s: 30, n: '6c · Two, two, two' }, { s: 32, n: '7 · The reveal' },
       { s: 34, n: '8 · End card' }
     ];
@@ -354,17 +357,15 @@ class Component extends DCLogic {
     // Board 1: 1 border, 2-3 save the date, 4 silver digits, 5-6 lines, 7 plus
     // Board 2: 8 six, 9 1+2+3=6, 10 perfect   Board 3: 11 the flip, perfect union
     // Board 4: 12 big six, 13 rings, 14 Greek line   Board 5: 15 add up our date
-    // Board 6a: 16-23 digits land one by one with a running total, 24 1 + 5, 24.5 = 6
+    // Board 6a: 16-23 the eight digits fly into the addition line
     // Board 6b: 26 2+0=2, 27 1+1=2, 28 2+0+2+7=11, 28.4 1+1=2, 29 a union of two
     // Board 6c: 30 2+2+2=6, 31 perfect date   Board 7: 32 reveal, 33 names   34 end card
     return [[400, 1], [1900, 2], [4000, 3], [5200, 4], [5900, 5], [8300, 6], [10300, 7],
       [12300, 8], [14600, 9], [15800, 10], [18300, 11], [24300, 12], [25500, 13], [28500, 14],
       [33800, 15],
-      [36800, 16], [37800, 16.5], [38600, 17], [39600, 17.5], [40400, 18], [41400, 18.5],
-      [42200, 19], [43200, 19.5], [44000, 20], [45000, 20.5], [45800, 21], [46800, 21.5],
-      [47600, 22], [48600, 22.5], [49400, 23], [50700, 23.5], [53000, 23.8], [55000, 24], [58000, 24.5],
-      [63700, 26], [65500, 26.5], [68300, 27], [70100, 27.5], [72900, 28], [75400, 28.3], [77000, 28.5], [78600, 28.65],
-      [80200, 28.8], [83000, 29], [86000, 30], [88000, 31], [92500, 32], [94700, 33], [96300, 34]];
+      [36800, 16], [37250, 17], [37700, 18], [38150, 19], [38600, 20], [39050, 21], [39500, 22], [39950, 23],
+      [41900, 26], [43700, 26.5], [46500, 27], [48300, 27.5], [51100, 28], [53600, 28.3], [55200, 28.5], [56800, 28.65],
+      [58400, 28.8], [61200, 29], [64200, 30], [66200, 31], [70700, 32], [72900, 33], [74500, 34]];
   }
   renderVals() {
     const p = this.state.phase;
@@ -404,17 +405,15 @@ class Component extends DCLogic {
     const dl = digits.map((t, i) => {
       let x, y, sz, o, cls = '';
       if (reveal) { x = dateC[dIdx[i]]; y = rowY; sz = dateFs; o = 1; cls = 'shine'; }
-      else if (p >= 16.5 + i) {
+      else if (p >= 16 + i) {
         x = sumC[2 * i]; y = rowY; sz = rowFs;
         o = active >= 0 && digitCluster[i] !== active ? 0.3 : 1;
-      } else if (p >= 16 + i) {
-        x = i === 0 ? 140 : 276; y = 462; sz = i === 0 ? 72 : 60; o = 1;
       } else { x = scat[i][0]; y = scat[i][1]; sz = scat[i][2]; o = p < 4 ? 0 : (p < 8 ? 0.9 : (p < 15 ? 0.28 : 1)); }
       return { t, x, y, s: sz, o, cls };
     });
     const seps = sepType.map((k, j) => ({
       x: sumC[2 * j + 1],
-      o: p >= 17.5 + j && p < 32 ? (active >= 0 && sepCluster[j] !== active ? 0.3 : 1) : 0
+      o: p >= 17 + j && p < 32 ? (active >= 0 && sepCluster[j] !== active ? 0.3 : 1) : 0
     }));
     const dots = [{ x: dateC[2], o: reveal ? 1 : 0 }, { x: dateC[5], o: reveal ? 1 : 0 }];
 
@@ -423,7 +422,7 @@ class Component extends DCLogic {
     const L15 = place([cD, cD]);
     const L1p5 = place([slotD, slotO, slotD]);
     const Lfull = place([slotD, slotO, slotD, slotO, slotD]);
-    const cOn = on(16.5, 26);
+    const cOn = false; // the add-to-15 count was dropped
     const two = k === 8;
     let tx = 117, ox = 140, px = 195, ex = Lfull[3], sx6 = Lfull[4];
     if (p >= 24.5) { tx = Lfull[0]; px = Lfull[1]; ox = Lfull[2]; ex = Lfull[3]; sx6 = Lfull[4]; }
@@ -432,12 +431,12 @@ class Component extends DCLogic {
     else if (two) { tx = 117; ox = 163; }
     const ink = '#1E2226', grey = '#53565A';
     const cnt = [
-      { t: '+', x: 218, fs: 48, o: visit > 0 ? 1 : 0, wt: 300, col: grey, cls: '' },
+      { t: '+', x: 218, fs: 48, o: 0, wt: 300, col: grey, cls: '' },
       { t: '1', x: tx, fs: cFs, o: cOn && two ? 1 : 0, wt: 400, col: ink, cls: '' },
       { t: k > 0 ? String(k < 8 ? totals[k - 1] : 5) : '', x: ox, fs: cFs, o: cOn && k > 0 ? 1 : 0, wt: 400, col: ink, cls: p < 23.8 ? (k % 2 ? 'bumpA' : 'bumpB') : '' },
-      { t: '+', x: px, fs: 56, o: on(24, 26) ? 1 : 0, wt: 300, col: grey, cls: '' },
-      { t: '=', x: ex, fs: 56, o: on(24.5, 26) ? 1 : 0, wt: 300, col: grey, cls: '' },
-      { t: '6', x: sx6, fs: cFs, o: on(24.5, 26) ? 1 : 0, wt: 400, col: ink, cls: '' }
+      { t: '+', x: px, fs: 56, o: 0, wt: 300, col: grey, cls: '' },
+      { t: '=', x: ex, fs: 56, o: 0, wt: 300, col: grey, cls: '' },
+      { t: '6', x: sx6, fs: cFs, o: 0, wt: 400, col: ink, cls: '' }
     ];
 
     // Each part, one at a time
@@ -497,6 +496,12 @@ class Component extends DCLogic {
     const stemD = 'M' + sp[0] + ' ' + sp[1] + ' C' + sp[2] + ' ' + sp[3] + ' ' + sp[4] + ' ' + sp[5] + ' ' + sp[6] + ' ' + sp[7]
       + ' C' + sp[8] + ' ' + sp[9] + ' ' + sp[10] + ' ' + sp[11] + ' ' + sp[12] + ' ' + sp[13];
 
+    // Add to calendar: Android uses Google Calendar; iPhone, Mac and Windows open the .ics file
+    // in their own calendar app. In the design canvas (no .ics file) it always uses Google.
+    const ua = typeof navigator !== 'undefined' ? navigator.userAgent || '' : '';
+    const isAndroid = /Android/i.test(ua);
+    const isPhone = isAndroid || /iPhone|iPad|iPod/i.test(ua) || (/Macintosh/i.test(ua) && typeof navigator !== 'undefined' && navigator.maxTouchPoints > 1);
+    const useIcs = !!this.props.ics && !isAndroid;
     const cal = 'https://calendar.google.com/calendar/render?action=TEMPLATE'
       + '&text=' + encodeURIComponent('Wedding of Katrina & Matthew')
       + '&dates=20271120T160000/20271120T230000&ctz=Australia/Melbourne'
@@ -506,8 +511,8 @@ class Component extends DCLogic {
     return {
       draw: p >= 1 ? 0 : 1,
       stdO: p >= 2 ? 1 : 0,
-      stdTop: p >= 3 ? 70 : 404,
-      stdSize: p >= 3 ? 11 : 22,
+      stdY: p >= 3 ? 0 : 334,
+      stdS: p >= 3 ? 1 : 2,
       l1: rv(on(5, 8)),
       l2: rv(on(6, 8)),
       l2glint: on(6, 8) ? 'glint' : '',
@@ -547,7 +552,7 @@ class Component extends DCLogic {
       eqB: on(27, 28) ? 1 : 0,
       eqc,
       c15: rv(false),
-      c6: rv(on(24.5, 32)),
+      c6: rv(false),
       c6Y: (p >= 26 ? -420 : 0) + (on(24.5, 32) ? 0 : 10),
       c6S: p >= 26 ? 0.88 : 1,
       c6D: p >= 26 ? 0 : 600,
@@ -561,7 +566,10 @@ class Component extends DCLogic {
       endT: rv(p >= 33),
       endB: rv(p >= 33),
       showEnd: p >= 34,
-      calHref: cal,
+      calHref: useIcs ? this.props.ics : cal,
+      calTarget: useIcs ? '_self' : '_blank',
+      calAlt: useIcs && !isPhone,
+      googleHref: cal,
       dDraw: ms(2200),
       tText: ms(1400),
       tMove: ms(1500),
@@ -583,7 +591,7 @@ class Component extends DCLogic {
 }
 
   var root = document.getElementById('card');
-  var comp = new Component({ speed: 1, controls: false });
+  var comp = new Component({ speed: 1, controls: false, ics: 'wedding.ics' });
   var vals = {};
   var look = function (path) { return path.split('.').reduce(function (o, k) { return o == null ? undefined : o[k]; }, vals); };
   var fill = function (tpl) { return tpl.replace(/\{\{\s*([\w.]+)\s*\}\}/g, function (m, p) { var v = look(p); return v == null ? '' : String(v); }); };
